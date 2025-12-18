@@ -124,6 +124,7 @@ object ImguiESP : Module(
                                     ),
                                     padding = 0f,
                                     color = getColorForEntity(entity),
+                                    name = entity.name.string
                                 )
                             )
                         }
@@ -156,7 +157,8 @@ object ImguiESP : Module(
                                         Vector2f(minX + (maxX - minX) / 2f, minY + (maxY - minY) / 2f),
                                         Vector2f(w, h),
                                         color = getColorForEntity(entity),
-                                        padding = padding.value.toFloat()
+                                        padding = padding.value.toFloat(),
+                                        name = entity.name.string
                                     )
                                 )
                             }
@@ -165,15 +167,35 @@ object ImguiESP : Module(
                 }
             }
 
-            boxes.forEach { scPos ->
+            boxes.forEach { drawTask ->
+                val minX = max(drawTask.position.x - drawTask.size.x / 2, 0f)
+                val minY = max(drawTask.position.y - drawTask.size.y / 2, 0f)
+                val maxX = min(drawTask.position.x + drawTask.size.x / 2, Lambda.mc.window.width.toFloat())
+                val maxY = min(drawTask.position.y + drawTask.size.y / 2, Lambda.mc.window.height.toFloat())
+                if (drawTask.name != null) {
+                    ImGui.getBackgroundDrawList()
+                        .addText(
+                            minX,
+                            max(minY - ImGui.calcTextSizeY(drawTask.name) - 10, 0f),
+                            ImGui.getColorU32(1f, 1f, 1f, 1f),
+                            drawTask.name
+                        )
+                }
+
                 ImGui.getBackgroundDrawList()
                     .addRect(
-                        max(scPos.position.x - scPos.size.x / 2, 0f),
-                        max(scPos.position.y - scPos.size.y / 2, 0f),
-                        min(scPos.position.x + scPos.size.x / 2, Lambda.mc.window.width.toFloat()),
-                        min(scPos.position.y + scPos.size.y / 2, Lambda.mc.window.height.toFloat()),
-                        ImGui.getColorU32(scPos.color.red / 255f, scPos.color.green / 255f, scPos.color.blue / 255f, scPos.color.alpha / 255f)
+                        minX,
+                        minY,
+                        maxX,
+                        maxY,
+                        ImGui.getColorU32(
+                            drawTask.color.red / 255f,
+                            drawTask.color.green / 255f,
+                            drawTask.color.blue / 255f,
+                            drawTask.color.alpha / 255f
+                        )
                     )
+
             }
 
             ImGui.popStyleVar(6)
