@@ -15,6 +15,7 @@ val kotlinFabricVersion: String by project
 val classGraphVersion: String by project
 val kotlinVersion: String by project
 val mavenType: String by project
+val spairVersion: String by project
 
 // The next lines are used to replace the version in the fabric.mod.json files
 // You most likely don't want to touch this
@@ -72,7 +73,7 @@ loom {
         all {
             // These arguments are used to play with an account in your development environment. Because Minecraft doesn't refresh your token for you,
             // you will have to change this every 24 hours.
-            programArgs("--username", "Steve", "--uuid", "8667ba71b85a4004af54457a9734eed7", "--accessToken", "****")
+            programArgs("--username", "KMatias", "--uuid", "792bcbfc-66bf-4363-ae81-ebc43641faa2")
         }
     }
 }
@@ -118,6 +119,7 @@ dependencies {
     // You do not need to include them in the final jar since we are using
     // Kotlin mod loaders which already includes them.
     // implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    modRuntimeOnly("com.ptsmods:devlogin:3.5")
 
     // Fabric
     modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
@@ -137,6 +139,11 @@ dependencies {
     // you may want to read this article on the classpath:
     // https://medium.com/javarevisited/back-to-the-basics-of-java-part-1-classpath-47cf3f834ff
     implementation("io.github.classgraph:classgraph:$classGraphVersion")
+    compileOnly("io.github.spair:imgui-java-binding:$spairVersion")
+    compileOnly("io.github.spair:imgui-java-lwjgl3:$spairVersion")
+    compileOnly("io.github.spair:imgui-java-natives-windows:$spairVersion")
+    compileOnly("io.github.spair:imgui-java-natives-linux:$spairVersion")
+    compileOnly("io.github.spair:imgui-java-natives-macos:$spairVersion")
 
     // Finish the configuration
     setupConfigurations()

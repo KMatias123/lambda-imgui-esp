@@ -1,0 +1,3 @@
+accessWidener   v2      named
+# Rendering
+accessible method net/minecraft/client/render/GameRenderer getFov (Lnet/minecraft/client/render/Camera;FZ)F

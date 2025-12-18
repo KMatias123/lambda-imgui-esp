@@ -1,4 +1,4 @@
-rootProject.name = "ExamplePlugin"
+rootProject.name = "Imgui-ESP"
 
 pluginManagement {
     repositories {

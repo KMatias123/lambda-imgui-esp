@@ -6,17 +6,16 @@
   "description": "${modDescription}",
   "authors": ["${modAuthors}"],
   "contact": {
-    "homepage": "https://github.com/lambda-client/ExamplePlugin",
-    "sources": "https://github.com/lambda-client/ExamplePlugin"
+    "homepage": "https://github.com/KMatias123/lambda-imgui-esp",
+    "sources": "https://github.com/KMatias123/lambda-imgui-esp"
   },
   "license": "GNU General Public License v3.0",
-  "icon": "${modIcon}",
   "environment": "client",
   "entrypoints": {
     "client": [
       {
         "adapter": "kotlin",
-        "value": "com.example.Example"
+        "value": "dev.kmatias.lambdaimguiesp.LambdaImGuiESPClient"
       }
     ]
   },

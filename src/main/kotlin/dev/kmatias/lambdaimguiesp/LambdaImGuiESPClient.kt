@@ -1,14 +1,14 @@
-package com.example
+package dev.kmatias.lambdaimguiesp
 
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
-object Example : ClientModInitializer {
-    const val MOD_NAME = "Example"
-    const val MOD_ID = "example"
-    const val SYMBOL = "λ"
+object LambdaImGuiESPClient : ClientModInitializer {
+    const val MOD_NAME = "ImguiESP"
+    const val MOD_ID = "lambda-imgui-esp"
+    const val SYMBOL = "imgui-esp"
 
     val VERSION: String = FabricLoader.getInstance()
         .getModContainer(MOD_ID).orElseThrow()
