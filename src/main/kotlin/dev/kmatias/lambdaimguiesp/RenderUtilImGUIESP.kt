@@ -19,7 +19,7 @@ fun worldToScreen(
     val mc = MinecraftClient.getInstance()
     val camera = mc.gameRenderer.camera
 
-    val camPos = camera.pos
+    val camPos = camera.cameraPos
     val x = (worldPos.x - camPos.x).toFloat()
     val y = (worldPos.y - camPos.y).toFloat()
     val z = (worldPos.z - camPos.z).toFloat()
@@ -49,7 +49,7 @@ fun getScreenBoundingBox(
     projectionMatrix: Matrix4f
 ): Vector4f? {
     val mc = MinecraftClient.getInstance()
-    val camPos = mc.gameRenderer.camera.pos
+    val camPos = mc.gameRenderer.camera.cameraPos
 
     val corners = arrayOf(
         Vector4f(box.minX.toFloat(), box.minY.toFloat(), box.minZ.toFloat(), 1f),

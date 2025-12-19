@@ -28,9 +28,9 @@ val replacements = file("gradle.properties").inputStream().use { stream ->
 val libs = file("libs")
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.3.0"
     id("org.jetbrains.dokka") version "2.0.0"
-    id("fabric-loom") version "1.10-SNAPSHOT"
+    id("fabric-loom") version "1.14-SNAPSHOT"
     id("com.gradleup.shadow") version "9.0.0-rc1"
     id("maven-publish")
 }
@@ -67,7 +67,7 @@ repositories {
 loom {
     accessWidenerPath = file("src/main/resources/$modId.accesswidener")
     enableTransitiveAccessWideners = true
-    enableModProvidedJavadoc = true
+    enableModProvidedJavadoc = false
 
     runs {
         all {
