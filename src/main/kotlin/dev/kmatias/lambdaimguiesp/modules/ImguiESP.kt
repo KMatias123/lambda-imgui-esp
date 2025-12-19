@@ -57,7 +57,7 @@ object ImguiESP : Module(
 
     private val boxes = mutableListOf<BoxDrawDataContainer>()
 
-    // todo: nametags
+    // todo: fix precision issues (change 3d stuff from float to double)
 
     fun getColorForEntity(entity: LivingEntity): Color {
         if (colorMode.value == ColorModes.Static) {
@@ -128,16 +128,19 @@ object ImguiESP : Module(
                                 )
                             )
                         }
-
                         Modes.Hitbox -> {
+                            val lastrenderX = if (entity.lastRenderX == 0.0) entity.x else entity.lastRenderX
+                            val lastrenderY = if (entity.lastRenderY == 0.0) entity.y else entity.lastRenderY
+                            val lastrenderZ = if (entity.lastRenderZ == 0.0) entity.z else entity.lastRenderZ
+
                             val box = entity.boundingBox.offset(
                                 -entity.x,
                                 -entity.y,
                                 -entity.z
                             ).offset(
-                                entity.lastRenderX + (entity.x - entity.lastRenderX) * mc.tickDelta,
-                                entity.lastRenderY + (entity.y - entity.lastRenderY) * mc.tickDelta,
-                                entity.lastRenderZ + (entity.z - entity.lastRenderZ) * mc.tickDelta
+                                lastrenderX + (entity.x - lastrenderX) * mc.tickDelta,
+                                lastrenderY + (entity.y - lastrenderY) * mc.tickDelta,
+                                lastrenderZ + (entity.z - lastrenderZ) * mc.tickDelta
                             )
 
                             getScreenBoundingBox(
@@ -195,7 +198,6 @@ object ImguiESP : Module(
                             drawTask.color.alpha / 255f
                         )
                     )
-
             }
 
             ImGui.popStyleVar(6)
